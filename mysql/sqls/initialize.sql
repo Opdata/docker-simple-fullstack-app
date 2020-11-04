@@ -1,3 +1,4 @@
+/* myapp DB가 있다면 삭제 */
 DROP DATABASE IF EXISTS myapp;
 
 CREATE DATABASE myapp;
