@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     axios.get(`api/values`).then((res) => {
       console.log("response", res.data);
-      setLists(response.data);
+      setLists(res.data);
     });
   }, []);
 

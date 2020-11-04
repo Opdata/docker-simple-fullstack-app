@@ -6,5 +6,4 @@ const pool = mysql.createPool({
   password: "Opdata",
   database: "myapp",
 });
-
 exports.pool = pool;
