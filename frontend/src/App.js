@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import axios from "axios";
 
 function App() {
-  const [lists, setLists] = useState([]);
-  const [value, setValue] = useState("");
-
   useEffect(() => {
-    axios.get(`api/values`).then((res) => {
-      console.log("response", res.data);
-      setLists(res.data);
+    axios.get("/api/values").then((response) => {
+      // console.log("response", response);
+      setLists(response.data);
     });
   }, []);
+
+  const [lists, setLists] = useState([]);
+  const [value, setValue] = useState("");
 
   const changeHandler = (event) => {
     setValue(event.currentTarget.value);
@@ -20,13 +20,14 @@ function App() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    axios.post(`/api/value`, { value: value }).then((res) => {
-      if (res.data.success) {
-        console.log("response.data", res.data);
-        setLists([...lists, res.data]);
+
+    axios.post("/api/value", { value: value }).then((response) => {
+      if (response.data.success) {
+        // console.log("response", response);
+        setLists([...lists, response.data]);
         setValue("");
       } else {
-        alert("DB값 넣기 실패");
+        alert("값을 DB에 넣는데 실패했습니다.");
       }
     });
   };
@@ -37,16 +38,16 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <div className="container">
           {lists &&
-            lists.map((list, index) => {
-              <li key={index}>{list.value}</li>;
-            })}
+            lists.map((list, index) => <li key={index}>{list.value} </li>)}
+          <br />
           <form className="example" onSubmit={submitHandler}>
             <input
               type="text"
               placeholder="입력해주세요..."
               onChange={changeHandler}
+              value={value}
             />
-            <button type="submit">확인</button>
+            <button type="submit">확인.</button>
           </form>
         </div>
       </header>
