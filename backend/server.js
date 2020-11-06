@@ -4,13 +4,6 @@ const db = require("./db");
 const mysql = require("mysql");
 const app = express();
 
-// const db = mysql.createConnection({
-//   host: "mysql",
-//   user: "root",
-//   password: "Opdata",
-//   database: "myapp",
-// });
-
 // json 형태로 오는 요청의 본문을 해석해줄수있게 등록
 app.use(bodyParser.json());
 
